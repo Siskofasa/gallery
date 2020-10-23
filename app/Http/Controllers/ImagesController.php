@@ -1,0 +1,53 @@
+<?php
+//I used this tutorial to make this: https://medium.com/@mactavish10101/how-to-upload-images-in-laravel-7-7a7f9982ebba
+namespace App\Http\Controllers;
+
+use App\Models\Image;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Session;
+
+class ImagesController extends Controller
+{
+    public function store (Request $request) {
+
+        if ($request->hasFile('image')) {
+            //  Let's do everything here
+            if ($request->file('image')->isValid()) {
+                //
+                $validated = $request->validate([
+                    'title' => 'string|max:40',
+                    'description' => 'string|max:140',
+                    'category' => 'string|max:40',
+                    'image' => 'mimes:jpeg,png|max:1014',
+                ]);
+                $extension = $request->image->extension();
+                $request->image->storeAs('/public', $validated['title'].".".$extension);
+                $url = Storage::url($validated['title'].".".$extension);
+                $file = Image::create([
+                    'image_link' => $url,
+                    'image_title' => $validated['title'],
+                    'image_description' => $validated['description'],
+                    'image_category' => $validated['category'],
+
+                ]);
+                Session::flash('success', "Success!");
+                return \Redirect::back();
+            }
+        }
+        abort(500, 'Could not upload image :(');
+    }
+
+    public function viewUploads () {
+        $images = Image::all();
+        return view('view_uploads')->with('images', $images);
+    }
+
+    public function viewUpload($selected_image) {
+        $image = Image::where('id', $selected_image)->first();
+        return view('view_upload', ['image'=> $image]);
+    }
+
+
+}
+
