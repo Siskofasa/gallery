@@ -15,12 +15,12 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('welcome');
 
 //Handling the uploading and viewing screenshots
-Route::view('/file-upload', 'upload');
-Route::post('/file-upload', 'ImagesController@store');
-Route::get('/view-uploads', 'ImagesController@viewUploads');
+Route::view('/file-upload', 'upload')->name('upload')->middleware('auth');
+Route::post('/file-upload', 'ImagesController@store')->middleware('auth')->name('post-file');
+Route::get('/view-uploads', 'ImagesController@viewUploads')->name('view-images');
 Route::get('/view-upload/{selected_image}', 'ImagesController@viewUpload')->name('view-image');
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {

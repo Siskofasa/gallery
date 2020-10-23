@@ -3,9 +3,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 
 <style>
@@ -75,5 +75,41 @@
         padding-top: .5rem;
         padding-left: 1rem;
         padding-right: 1rem;
+    }
+
+    .header {
+        max-width: 80%;
+    }
+
+    .content {
+        max-width: 70%;
+        margin: auto;
+        margin-top: 15px;
+        background-color: white;
+        border-radius: 4px;
+        padding: 15px;
+
+    }
+
+    .searchbar {
+        max-width: 40%;
+        border-radius: 4px;
+        margin-bottom: 15px;
+        border: 1px solid grey;
+
+    }
+
+    #input-group {
+        border: none;
+    }
+
+    .form-control {
+        border: none; !important
+    }
+    .button {
+        border: 1px solid grey;
+        padding: 15px 32px;
+        text-align: center;
+        display: inline-block;
     }
 </style>

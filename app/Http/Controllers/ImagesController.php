@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Image;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Session;
 
@@ -12,7 +13,6 @@ class ImagesController extends Controller
     public function store (Request $request) {
 
         if ($request->hasFile('image')) {
-            //  Let's do everything here
             if ($request->file('image')->isValid()) {
                 //
                 $validated = $request->validate([
@@ -25,6 +25,7 @@ class ImagesController extends Controller
                 $request->image->storeAs('/public', $validated['title'].".".$extension);
                 $url = Storage::url($validated['title'].".".$extension);
                 $file = Image::create([
+                    'user_id' => $request->input('user_id'),
                     'image_link' => $url,
                     'image_title' => $validated['title'],
                     'image_description' => $validated['description'],

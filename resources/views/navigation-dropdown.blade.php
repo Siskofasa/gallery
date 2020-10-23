@@ -3,23 +3,31 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
             <div class="flex">
-                <!-- Logo -->
-                <div class="flex-shrink-0 flex items-center">
-                    <a href="{{ route('dashboard') }}">
-                        <x-jet-application-mark class="block h-9 w-auto" />
-                    </a>
-                </div>
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-jet-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
-                        {{ __('Dashboard') }}
+
+                    <x-jet-nav-link href="{{ route('welcome') }}" >
+                        Welcome
                     </x-jet-nav-link>
+                    <x-jet-nav-link href="{{ route('view-images') }}">
+                        View Gallery
+                    </x-jet-nav-link>
+
+                    @if(Auth::user())
+                        <x-jet-nav-link href="{{ route('upload') }}">
+                            Upload new image
+                        </x-jet-nav-link>
+                    @endif
+
                 </div>
+
             </div>
 
             <!-- Settings Dropdown -->
+
             <div class="hidden sm:flex sm:items-center sm:ml-6">
+                @if(Auth::user())
                 <x-jet-dropdown align="right" width="48">
                     <x-slot name="trigger">
                         @if (Laravel\Jetstream\Jetstream::managesProfilePhotos())
@@ -40,10 +48,6 @@
                     </x-slot>
 
                     <x-slot name="content">
-                        <!-- Account Management -->
-                        <div class="block px-4 py-2 text-xs text-gray-400">
-                            {{ __('Manage Account') }}
-                        </div>
 
                         <x-jet-dropdown-link href="{{ route('profile.show') }}">
                             {{ __('Profile') }}
@@ -100,7 +104,21 @@
                         </form>
                     </x-slot>
                 </x-jet-dropdown>
+                @else
+
+                    <x-jet-nav-link href="{{ route('login') }}">
+                        Login
+                    </x-jet-nav-link>
+
+                    @if (Route::has('register'))
+                        <x-jet-nav-link href="{{ route('register') }}">
+                            Register
+                        </x-jet-nav-link>
+                    @endif
+                @endif
             </div>
+
+
 
             <!-- Hamburger -->
             <div class="-mr-2 flex items-center sm:hidden">
@@ -124,9 +142,12 @@
 
         <!-- Responsive Settings Options -->
         <div class="pt-4 pb-1 border-t border-gray-200">
+            @if(Auth::user())
             <div class="flex items-center px-4">
                 <div class="flex-shrink-0">
-                    <img class="h-10 w-10 rounded-full" src="{{ Auth::user()->profile_photo_url }}" alt="{{ Auth::user()->name }}" />
+
+                        <img class="h-10 w-10 rounded-full" src="{{ Auth::user()->profile_photo_url }}" alt="{{ Auth::user()->name }}" />
+
                 </div>
 
                 <div class="ml-3">
@@ -187,6 +208,7 @@
                     @endforeach
                 @endif
             </div>
+            @endif
         </div>
     </div>
 </nav>
