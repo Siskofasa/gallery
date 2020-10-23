@@ -25,12 +25,11 @@ class ImagesController extends Controller
                 $request->image->storeAs('/public', $validated['title'].".".$extension);
                 $url = Storage::url($validated['title'].".".$extension);
                 $file = Image::create([
-                    'user_id' => $request->input('user_id'),
+                    'user_id' => Auth::id(),
                     'image_link' => $url,
                     'image_title' => $validated['title'],
                     'image_description' => $validated['description'],
                     'image_category' => $validated['category'],
-
                 ]);
                 Session::flash('success', "Success!");
                 return \Redirect::back();
