@@ -38,11 +38,6 @@ class ImagesController extends Controller
         abort(500, 'Could not upload image :(');
     }
 
-    public function viewUploads () {
-        $images = Image::all();
-        return view('view_uploads')->with('images', $images);
-    }
-
     public function viewUpload($selected_image) {
         $image = Image::where('id', $selected_image)->first();
         return view('view_upload', ['image'=> $image]);

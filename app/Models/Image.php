@@ -16,8 +16,6 @@ class Image extends Model
         'image_category',
     ];
 
-
-
     public function user()
     {
         return $this->belongsTo('App\Models\User');

@@ -20,7 +20,14 @@
                     <br/>
                     <input type="text" class="form-control" id="description" placeholder="Enter description" name="description">
                     <br/>
-                    <input type="text" class="form-control" id="category" placeholder="Enter category" name="category">
+                    <label for="category">Category</label>
+                    <select id="category" name="category">
+                        <option value="raid">Raid</option>
+                        <option value="achievement">Achievement</option>
+                        <option value="transmog">Transmogrification</option>
+                        <option value="event">Guild Event</option>
+                        <option value="other">Other</option>
+                    </select>
                 </div>
                 <div class="form-group">
                     <label for="image">Choose Image</label>

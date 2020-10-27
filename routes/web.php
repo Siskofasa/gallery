@@ -17,16 +17,20 @@ Route::get('/', function () {
     return view('welcome');
 })->name('welcome');
 
+//Handling the search function
+Route::get('/search', 'SearchController@search')->name('search');
+
 //Handling the uploading and viewing screenshots
 Route::view('/file-upload', 'upload')->name('upload')->middleware('auth');
 Route::post('/file-upload', 'ImagesController@store')->middleware('auth')->name('post-file');
-Route::get('/view-uploads', 'ImagesController@viewUploads')->name('view-images');
+Route::view('/view-uploads', 'view_uploads' )->name('view-images');
 Route::get('/view-upload/{selected_image}', 'ImagesController@viewUpload')->name('view-image');
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
 
+//Roles
 Route::get('admin/gm', function () {
     //
 })->middleware('check_user_role:' . \App\Role\UserRole::ROLE_GM);
