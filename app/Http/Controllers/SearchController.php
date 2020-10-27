@@ -12,16 +12,16 @@ class SearchController extends Controller {
 
     function search(Request $request){
         $q = $request->get('q');
-        $s = $request->get('s');
+/*        $s = $request->get('s');*/
         $images_name = Image::with('user')
             ->where('image_title','LIKE','%'.$q.'%')
-            ->whereIn('image_category', $s)
+/*            ->whereIn('image_category', $s)*/
             ->get();
 
         $images_user = DB::table('images')
             ->join('users', 'images.user_id', '=', 'users.id')
             ->where('users.name', 'LIKE', '%'.$q.'%')
-            ->whereIn('images.image_category', $s)
+/*            ->whereIn('images.image_category', $s)*/
             ->select('images.*', 'users.name')
             ->get();
 

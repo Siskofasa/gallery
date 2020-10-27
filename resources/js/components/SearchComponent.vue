@@ -9,7 +9,7 @@
     <div class="content">
         <div class="searchbar">
             <b-input-group>
-                <b-form-input v-model="query_data" id="searchQuery" placeholder="Search image">
+                <b-form-input v-model="query_data" id="searchQuery" placeholder="Search image by name or user">
                 </b-form-input>
                 <span class="input-group-btn">
                         <button type="button" class="btn btn-default btn-sm" v-on:click="search">
@@ -25,7 +25,7 @@
             </b-input-group>
         </div>
 
-        <b-form-group label="Filter:">
+        <b-form-group label="Filter by category:">
             <b-form-checkbox-group
                 id="checkbox-group-1"
                 v-model="selected"
@@ -45,13 +45,13 @@
                         <th class="cs-p-1">Category</th>
                     </tr>
                 </thead>
-                <tr v-for="image in this.search_result">
+                <tr v-for="image in this.filtered_list">
                     <td class="cs-p-1">{{ image.image_title }}</td>
 <!--                    https://flaviocopes.com/how-to-remove-last-char-string-js/-->
                     <td class="cs-p-1"><a :href="imageLink.slice(0, -1) + image.id">View Image</a></td>
                     <td class="cs-p-1">{{ image.name ?image.name:image.user.name }}</td>
                     <td class="cs-p1-">{{image.created_at|changeDate}}</td>
-                    <td class="cs-p1-">{{image.image_category}}</td>
+                    <td class="cs-p1-">{{renameCategory(image.image_category)}}</td>
                 </tr>
             </table>
         </div>
@@ -70,7 +70,7 @@
                     { text: 'Achievement', value: 'achievement' },
                     { text: 'Transmogrification', value: 'transmog' },
                     { text: 'Guild Event', value: 'event' },
-                    {text: 'Other', value: 'other'}
+                    { text: 'Other', value: 'other'}
                 ],
 
                 selected: ['raid', 'achievement', 'transmog', 'event', 'other']
@@ -89,8 +89,24 @@
 
         methods: {
             search(){
-                axios.get(this.searchRoute, {params:{'q':this.query_data, 's':this.selected}} )
+                axios.get(this.searchRoute, {params:{'q':this.query_data}} )
                     .then(result=>{this.search_result=result.data.images})
+            },
+
+            renameCategory(category_string){
+                if (!category_string || !this.options){
+                    return '';
+                }
+                let result = '';
+
+                this.options.forEach( option=>{
+                        if (option.value === category_string) {
+                            result = option.text;
+                        }
+                    }
+                )
+
+                return result;
             }
         },
 
@@ -98,6 +114,15 @@
             changeDate(date_string){
                 let new_date_string = new Date(date_string);
                 return new_date_string.toLocaleDateString('en-GB');
+            }
+
+        },
+
+        computed: {
+            filtered_list(){
+                return this.search_result.filter(image=>{
+                    return this.selected.includes(image.image_category)
+                })
             }
         }
     }
