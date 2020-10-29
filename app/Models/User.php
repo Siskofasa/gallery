@@ -50,6 +50,11 @@ class User extends Authenticatable
         return $this->hasMany('App\Models\Image');
     }
 
+    public function likes()
+    {
+        return $this->hasMany('App\Models\Like');
+    }
+
     public function addRole(string $role)
     {
         $roles = $this->getRoles();

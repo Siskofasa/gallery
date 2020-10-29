@@ -5,7 +5,7 @@
             {{ __('Dashboard') }}
         </h2>
     </x-slot>
-
+<div id="app">
     <div class="content">
         <div class="table-responsive">
             <table class="table table-hover">
@@ -21,6 +21,19 @@
                     <tr>
                         <td class="cs-p-1"><img src="{{$image->image_link}}"></td>
                     </tr>
+                    @if(Auth::user())
+                    <tr>
+                        <td class="cs=p=11">
+                            {{--Hier komt nog de route naar de controller die de like danwel unlike verwerkt--}}
+                            <like-component like-route="{{route('like')}}"
+                                            user-id="{{Auth::user()->id}}"
+                                            image-id="{{$image->id}}"
+                                            :temp-like-count="{{$image->likes()->count()}}"
+                                            :temp-like-exists="{{$like_exists ? 'true' : 'false'}}"
+                            ></like-component>
+                        </td>
+                    </tr>
+                    @endif
                     <tr>
                         <td class="cs-p-1">{{$image->image_description}}</td>
                     </tr>
@@ -30,5 +43,7 @@
             </table>
         </div>
     </div>
+</div>
+
 
 </x-app-layout>

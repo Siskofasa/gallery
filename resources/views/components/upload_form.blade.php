@@ -13,6 +13,15 @@
         <div class="row justify-content-center">
             {{-- enctype attribute is important if your form contains file upload --}}
             {{-- Please check https://www.w3schools.com/tags/att_form_enctype.asp for further info --}}
+
+            @if (Auth::user()->likes()->count() < 5)
+                <div class="denied">
+                    <p>You need 5 likes on other images to upload your own images. </p>
+                    <p>You currently have {{Auth::user()->likes()->count()}} likes.</p>
+                </div>
+
+            @else
+
             <form class="m-2" method="post" action="{{route('post-file')}}" enctype="multipart/form-data">
                 @csrf
                 <div class="form-group">
@@ -35,6 +44,8 @@
                 </div>
                 <button type="submit" class="btn btn-dark d-block w-75 mx-auto">Upload</button>
             </form>
+
+            @endif
         </div>
 
         @include('components.errors')

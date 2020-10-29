@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Image;
+use App\Models\Like;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -40,7 +41,8 @@ class ImagesController extends Controller
 
     public function viewUpload($selected_image) {
         $image = Image::where('id', $selected_image)->first();
-        return view('view_upload', ['image'=> $image]);
+        $like_exists = Like::where('user_id', Auth::id())->where('image_id', $image->id)->exists();
+        return view('view_upload', ['image'=> $image, 'like_exists'=> $like_exists]);
     }
 
 

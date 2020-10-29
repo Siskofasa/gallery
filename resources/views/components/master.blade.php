@@ -107,6 +107,16 @@
         border: none;
     }
 
+    .denied {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+
+    .denied > p {
+        padding: 5px;
+    }
+
     .form-control {
         border: none; !important
     }

@@ -26,11 +26,17 @@ Route::post('/file-upload', 'ImagesController@store')->middleware('auth')->name(
 Route::view('/view-uploads', 'view_uploads' )->name('view-images');
 Route::get('/view-upload/{selected_image}', 'ImagesController@viewUpload')->name('view-image');
 
+//Handling likes
+Route::post('/like-post', 'LikeController@likeChecker')->middleware('auth')->name('like');
+
+
+
+//Handling Auth
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
 
-//Roles
+//Handling Roles
 Route::get('admin/gm', function () {
     //
 })->middleware('check_user_role:' . \App\Role\UserRole::ROLE_GM);
