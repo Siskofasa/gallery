@@ -23,7 +23,11 @@ class CheckUserRole
 
     public function handle($request, Closure $next, $role){
     /** @var User $user */
-        $user = Auth::guard()->user();
+        $user = Auth::user();
+
+        if (is_null($user)){
+            throw new AuthorizationException('You are not logged in');
+        }
 
         if ( ! $this->roleChecker->check($user, $role)) {
             throw new AuthorizationException('You do not have permission to view this page');

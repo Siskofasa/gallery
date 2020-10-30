@@ -19,7 +19,6 @@
                     <p>You need 5 likes on other images to upload your own images. </p>
                     <p>You currently have {{Auth::user()->likes()->count()}} likes.</p>
                 </div>
-
             @else
 
             <form class="m-2" method="post" action="{{route('post-file')}}" enctype="multipart/form-data">

@@ -29,14 +29,14 @@ Route::get('/view-upload/{selected_image}', 'ImagesController@viewUpload')->name
 //Handling likes
 Route::post('/like-post', 'LikeController@likeChecker')->middleware('auth')->name('like');
 
-
-
 //Handling Auth
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
 
-//Handling Roles
+//Handling roles
+Route::get('admin-dashboard', 'AdminController@viewUploads')->middleware('check_user_role:' . \App\Role\UserRole::ROLE_OFFICER)->name('admin-dashboard');
+
 Route::get('admin/gm', function () {
     //
 })->middleware('check_user_role:' . \App\Role\UserRole::ROLE_GM);

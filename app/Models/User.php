@@ -69,6 +69,7 @@ class User extends Authenticatable
     public function setRoles(array $roles)
     {
         $this->setAttribute('roles', $roles);
+        $this->save();
         return $this;
     }
 
