@@ -9,7 +9,7 @@
     <div class="content">
         <div class="table-responsive">
             <table class="table table-hover">
-                @if($image)
+                @if($image->is_visible)
                     <thead>
                     <tr>
                         <th class="cs-p-1">{{$image->image_title}}</th>

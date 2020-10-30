@@ -18,13 +18,14 @@ Route::get('/', function () {
 })->name('welcome');
 
 //Handling the search function
-Route::get('/search', 'SearchController@search')->name('search');
+Route::get('search', 'SearchController@search')->name('search');
 
 //Handling the uploading and viewing screenshots
-Route::view('/file-upload', 'upload')->name('upload')->middleware('auth');
-Route::post('/file-upload', 'ImagesController@store')->middleware('auth')->name('post-file');
-Route::view('/view-uploads', 'view_uploads' )->name('view-images');
-Route::get('/view-upload/{selected_image}', 'ImagesController@viewUpload')->name('view-image');
+Route::view('file-upload', 'upload')->name('upload')->middleware('auth');
+Route::post('file-upload', 'ImagesController@store')->middleware('auth')->name('post-file');
+Route::view('view-uploads', 'view_uploads' )->name('view-images');
+Route::get('view-upload/{selected_image}', 'ImagesController@viewUpload')->name('view-image');
+Route::post('update-visibility', 'AdminController@updateVisibility')->middleware('check_user_role:' . \App\Role\UserRole::ROLE_OFFICER)->name('update-visibility');
 
 //Handling likes
 Route::post('/like-post', 'LikeController@likeChecker')->middleware('auth')->name('like');

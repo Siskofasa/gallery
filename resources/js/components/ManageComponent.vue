@@ -14,11 +14,14 @@
                 <td class="cs-p-1"><a :href="imageLink.slice(0, -1) + image.id">{{ image.image_title }}</a></td>
                 <td class="cs-p-1"></td>
                 <td class="cs-p-1">
-                    <input type="checkbox">
-                    <span class="slider">Active</span>
+                    <toggle-button :value="image.is_visible === 1"
+                                   color="#82C7EB"
+                                   @change="updateVisibility(image)"
+                                   :sync="false"
+                                   :labels="true"/>
                 </td>
-                <td class="cs-p-1"><button type="button" class="btn btn-primary" v-on:click="edit_button"> Edit </button></td>
-                <td class="cs-p-1"><button type="button" class="btn btn-secondary" v-on:click="delete_button"> Delete </button></td>
+                <td class="cs-p-1"><button type="button" class="btn btn-primary" v-on:click=""> Edit </button></td>
+                <td class="cs-p-1"><button type="button" class="btn btn-secondary" v-on:click=""> Delete </button></td>
 
             </tr>
         </table>
@@ -31,8 +34,18 @@
 
         props: {
             images : Array,
-            imageLink : ''
-        }
+            imageLink : '',
+            updateVisibilityRoute: ''
+        },
+
+        methods: {
+            updateVisibility(image){
+                axios.post(this.updateVisibilityRoute, {'image_id':image.id})
+                    .then(result=>{
+                        console.log(result)
+                    })
+            }
+        },
 
 
     }

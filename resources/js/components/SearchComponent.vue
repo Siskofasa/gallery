@@ -121,7 +121,7 @@
         computed: {
             filtered_list(){
                 return this.search_result.filter(image=>{
-                    return (this.selected.includes(image.image_category) && image.is_visible === "1")
+                    return (this.selected.includes(image.image_category) && image.is_visible === 1)
                 })
             }
         }

@@ -14,7 +14,7 @@ class AddIsvisibleToImages extends Migration
     public function up()
     {
         Schema::table('images', function (Blueprint $table) {
-            $table->text('is_visible')
+            $table->boolean('is_visible')
                 ->after('image_category')
                 ->default(true);
         });
