@@ -18,12 +18,12 @@
                         <x-jet-nav-link href="{{ route('upload') }}">
                             Upload new image
                         </x-jet-nav-link>
-                    @endif
 
-                    @if((new App\Role\RoleChecker())->check(Auth::user(), \App\Role\UserRole::ROLE_OFFICER))
-                        <x-jet-nav-link href="{{ route('admin-dashboard') }}">
-                            Manage content
-                        </x-jet-nav-link>
+                        @if((new App\Role\RoleChecker())->check(Auth::user(), \App\Role\UserRole::ROLE_OFFICER))
+                            <x-jet-nav-link href="{{ route('admin-dashboard') }}">
+                                Manage content
+                            </x-jet-nav-link>
+                        @endif
                     @endif
 
                 </div>

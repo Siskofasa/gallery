@@ -4,26 +4,16 @@
 namespace App\Http\Controllers;
 
 
+use App\Http\Requests\UpdateVisibilityRequest;
 use App\Models\Image;
 use Illuminate\Http\Request;
 
 class AdminController
 {
 
-    public function updateVisibility(Request $request){
+    public function updateVisibility(UpdateVisibilityRequest $request){
         $image_id = $request->input('image_id');
         $image = Image::where('id', $image_id)->first();
-
-        /*if ($image === 1){
-            $image->update(['is_visible' => false]);
-        }
-
-        else {
-            $image->update(['is_visible' => true]);
-        }*/
-
-/*        $image->update(['is_visible' => $image->is_visible === 1 ? false : true]);*/
-
         $image->is_visible = !$image->is_visible;
 
         $image->save();

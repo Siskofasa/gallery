@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UpdateLikeRequest;
 use App\Models\Image;
 use App\Models\Like;
 use App\Models\User;
@@ -9,7 +10,7 @@ use Illuminate\Http\Request;
 
 class LikeController extends Controller
 {
-    public function likeChecker(Request $request){
+    public function likeChecker(UpdateLikeRequest $request){
 
         $user_id = $request->input('user_id');
         $image_id = $request->input('image_id');

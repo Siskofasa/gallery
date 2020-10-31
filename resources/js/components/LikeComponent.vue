@@ -21,8 +21,6 @@
 
         methods: {
             like(){
-/*                axios.get(this.searchRoute, {params:{'q':this.query_data}} )
-                    .then(result=>{this.search_result=result.data.images})*/
 
                 axios.post(this.likeRoute, {'user_id':this.userId, 'image_id':this.imageId})
                     .then(result=>{

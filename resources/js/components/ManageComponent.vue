@@ -42,11 +42,9 @@
             updateVisibility(image){
                 axios.post(this.updateVisibilityRoute, {'image_id':image.id})
                     .then(result=>{
-                        console.log(result)
                     })
             }
         },
-
 
     }
 </script>

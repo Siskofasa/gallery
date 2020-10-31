@@ -2,6 +2,7 @@
 //I used this tutorial to make this: https://medium.com/@mactavish10101/how-to-upload-images-in-laravel-7-7a7f9982ebba
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreImagesRequest;
 use App\Models\Image;
 use App\Models\Like;
 use Illuminate\Http\Request;
@@ -11,17 +12,12 @@ use Illuminate\Support\Facades\Session;
 
 class ImagesController extends Controller
 {
-    public function store (Request $request) {
+    public function store(StoreImagesRequest $request) {
 
         if ($request->hasFile('image')) {
             if ($request->file('image')->isValid()) {
                 //
-                $validated = $request->validate([
-                    'title' => 'string|max:40',
-                    'description' => 'string|max:140',
-                    'category' => 'string|max:40',
-                    'image' => 'mimes:jpeg,png|max:1014',
-                ]);
+                $validated = $request->validated();
                 $extension = $request->image->extension();
                 $request->image->storeAs('/public', $validated['title'].".".$extension);
                 $url = Storage::url($validated['title'].".".$extension);
