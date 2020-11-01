@@ -149,4 +149,14 @@
         border-top: 1px solid grey;
 
     }
+
+    .preview {
+        max-width: 100px;
+        max-height: 100px;
+    }
+
+    .image-table{
+        cursor: pointer;
+    }
+
 </style>

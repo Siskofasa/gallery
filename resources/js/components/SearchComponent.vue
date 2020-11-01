@@ -45,10 +45,11 @@
                         <th class="cs-p-1">Category</th>
                     </tr>
                 </thead>
-                <tr v-for="image in this.filtered_list">
+                <tr class="image-table" v-for="image in this.filtered_list"
+                @click="goToImage(image)">
                     <td class="cs-p-1">{{ image.image_title }}</td>
 <!--                    https://flaviocopes.com/how-to-remove-last-char-string-js/-->
-                    <td class="cs-p-1"><a :href="imageLink.slice(0, -1) + image.id">View Image</a></td>
+                    <td class="cs-p-1"><img class="preview" v-bind:src="image.image_link" alt="View Image"></td>
                     <td class="cs-p-1">{{ image.name ?image.name:image.user.name }}</td>
                     <td class="cs-p1-">{{image.created_at|changeDate}}</td>
                     <td class="cs-p1-">{{renameCategory(image.image_category)}}</td>
@@ -107,6 +108,10 @@
                 )
 
                 return result;
+            },
+
+            goToImage(image){
+                window.location.href=this.imageLink.slice(0, -1) + image.id
             }
         },
 
