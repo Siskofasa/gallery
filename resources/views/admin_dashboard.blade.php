@@ -14,9 +14,11 @@
 
         <div id="app">
             <meta name="csrf-token" content="{{ csrf_token() }}">
-            <manage-component :images="{{$images}}"
+            <manage-component :temp-images="{{$images}}"
                               image-link="{{route('view-image', [ "selected_image" => "a"])}}"
-                              update-visibility-route="{{route('update-visibility')}}">
+                              update-visibility-route="{{route('update-visibility')}}"
+                              delete-image-route="{{route('delete-image')}}"
+            >
             </manage-component>
         </div>
 

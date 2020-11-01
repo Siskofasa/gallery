@@ -37,13 +37,26 @@
                     <tr>
                         <td class="cs-p-1">{{$image->image_description}}</td>
                     </tr>
+            </table>
+
+            @if(Auth::user())
+            <comment-component
+                post-comment-route="{{route('post-comment')}}"
+                view-comment-route="{{route('view-comment', [$image->id])}}"
+                delete-comment-route="{{route('delete-comment')}}"
+                :user="{{Auth::user()}}"
+                image-id="{{$image->id}}">
+            </comment-component>
+            @endif
+
                 @else
                     <p>The image could not be found. </p>
                 @endif
-            </table>
+
         </div>
     </div>
 </div>
 
 
 </x-app-layout>
+

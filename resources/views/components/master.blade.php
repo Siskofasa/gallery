@@ -10,6 +10,16 @@
 </head>
 
 <style>
+
+    body {
+        background-color: #F6EEFF !important;
+    }
+
+    .welcome {
+        font-style: italic;
+        text-align: center;
+
+    }
     .cs-alert {
         width: 60%;
         margin: 5px;
@@ -127,5 +137,16 @@
         display: inline-block;
     }
 
+    .place-comment {
+        border: 1px solid grey;
+        border-radius: 5px;
+        padding: 10px;
+        margin-bottom: 10px;
+    }
 
+    .single-comment {
+        padding: 10px;
+        border-top: 1px solid grey;
+
+    }
 </style>

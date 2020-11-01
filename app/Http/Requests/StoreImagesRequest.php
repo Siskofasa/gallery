@@ -25,7 +25,7 @@ class StoreImagesRequest extends FormRequest
     {
         return [
             'title' => 'required|string|max:40',
-            'description' => 'required|string|max:140',
+            'description' => 'required|string|max:256',
             'category' => 'required|string|max:40|in:raid,achievement,transmog,event,other',
             'image' => 'required|mimes:jpeg,png|max:1014',
         ];

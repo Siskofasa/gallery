@@ -4,6 +4,7 @@
 namespace App\Http\Controllers;
 
 
+use App\Http\Requests\DeleteImageRequest;
 use App\Http\Requests\UpdateVisibilityRequest;
 use App\Models\Image;
 use Illuminate\Http\Request;
@@ -18,6 +19,14 @@ class AdminController
 
         $image->save();
         return response()->json(['image'=>$image]);
+    }
+
+    public function deleteImage(DeleteImageRequest $request){
+        $image_id = $request->input('image_id');
+        $image = Image::where('id', $image_id)->first();
+
+        $image->delete();
+        return response()->json(['images' => Image::all()]);
     }
 
 

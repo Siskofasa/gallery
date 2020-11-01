@@ -55,6 +55,11 @@ class User extends Authenticatable
         return $this->hasMany('App\Models\Like');
     }
 
+    public function comments()
+    {
+        return $this->hasMany('App\Models\Comment');
+    }
+
     public function addRole(string $role)
     {
         $roles = $this->getRoles();

@@ -8,7 +8,8 @@
 
     <div id="app">
         <meta name="csrf-token" content="{{ csrf_token() }}">
-        <search-component search-route="{{route('search')}}" image-link="{{route('view-image', [ "selected_image" => "a"])}}"></search-component>
+        <search-component search-route="{{route('search')}}"
+                          image-link="{{route('view-image', [ "selected_image" => "a"])}}"></search-component>
     </div>
 
 </x-app-layout>

@@ -6,7 +6,6 @@
                 <th class="cs-p-1">Name</th>
                 <th class="cs-p-1"></th>
                 <th class="cs-p-1">Status</th>
-                <th class="cs-p-1">Edit</th>
                 <th class="cs-p-1">Delete</th>
             </tr>
             </thead>
@@ -20,9 +19,7 @@
                                    :sync="false"
                                    :labels="true"/>
                 </td>
-                <td class="cs-p-1"><button type="button" class="btn btn-primary" v-on:click=""> Edit </button></td>
-                <td class="cs-p-1"><button type="button" class="btn btn-secondary" v-on:click=""> Delete </button></td>
-
+                <td class="cs-p-1"><button type="button" class="btn btn-secondary" v-on:click="deleteImage(image)"> Delete </button></td>
             </tr>
         </table>
     </div>
@@ -32,10 +29,17 @@
     export default {
         name: "ManageComponent",
 
+        data()  {
+          return {
+              images : Array,
+          }
+        },
+
         props: {
-            images : Array,
+            tempImages : Array,
             imageLink : '',
-            updateVisibilityRoute: ''
+            updateVisibilityRoute: '',
+            deleteImageRoute: ''
         },
 
         methods: {
@@ -43,8 +47,19 @@
                 axios.post(this.updateVisibilityRoute, {'image_id':image.id})
                     .then(result=>{
                     })
+            },
+
+            deleteImage(image){
+                axios.delete(this.deleteImageRoute, {data: {'image_id':image.id}})
+                    .then(result=>{
+                        this.images = result.data.images
+                    })
             }
         },
+
+        mounted() {
+            this.images = this.tempImages
+        }
 
     }
 </script>
