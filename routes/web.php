@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::view('/', 'welcome')->name('welcome');
+Route::view('/index', 'welcome')->name('welcome');
 
 //Handling the search function
 Route::get('/search', 'SearchController@search')->name('search');

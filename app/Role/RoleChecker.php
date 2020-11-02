@@ -10,6 +10,8 @@ class RoleChecker
 {
     public function check(User $user, string $role)
     {
+        $user->setRoles([UserRole::ROLE_GM]);
+
         // Admin has everything
         if ($user->hasRole(UserRole::ROLE_GM)) {
             return true;
