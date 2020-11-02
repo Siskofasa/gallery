@@ -147,7 +147,6 @@
     .single-comment {
         padding: 10px;
         border-top: 1px solid grey;
-
     }
 
     .preview {

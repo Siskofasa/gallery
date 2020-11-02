@@ -9,7 +9,8 @@ use Illuminate\Support\Facades\DB;
 
 class SearchController extends Controller {
 
-/*https://laravel.com/docs/8.x/eloquent-relationships#constraining-eager-loads*/
+/*https://medium.com/justlaravel/search-functionality-in-laravel-a2527282150b
+ * https://laravel.com/docs/8.x/eloquent-relationships#constraining-eager-loads*/
 
 
     //Deze data wordt automatisch door de querybuilder ge-escaped.
